@@ -77,7 +77,7 @@ class LeePositionController(nn.Module):
     """
     def __init__(
         self, 
-        g: float, 
+        g: float,   # 重力加速度
         uav_params,
     ) -> None:
         super().__init__()

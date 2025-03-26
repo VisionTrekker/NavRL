@@ -1,5 +1,5 @@
 defaults:
-  - _self_
+  - _self_  # 当前配置文件本身，优先级最低，可被下面的配置文件覆盖
   - drone
   - ppo
   - sim

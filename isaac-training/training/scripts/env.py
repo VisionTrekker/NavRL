@@ -32,10 +32,11 @@ class NavigationEnv(IsaacEnv):
         # LiDAR params:
         self.lidar_range = cfg.sensor.lidar_range
         self.lidar_vfov = (max(-89., cfg.sensor.lidar_vfov[0]), min(89., cfg.sensor.lidar_vfov[1]))
-        self.lidar_vbeams = cfg.sensor.lidar_vbeams
-        self.lidar_hres = cfg.sensor.lidar_hres
+        self.lidar_vbeams = cfg.sensor.lidar_vbeams # 垂直方向上的光束数量
+        self.lidar_hres = cfg.sensor.lidar_hres # 水平方向上的分辨率（每度数间隔的采样点数）
         self.lidar_hbeams = int(360/self.lidar_hres)
 
+        # 设置环境参数：机器人的数量、最大episode步数等
         super().__init__(cfg, cfg.headless)
         
         # Drone Initialization
@@ -45,9 +46,9 @@ class NavigationEnv(IsaacEnv):
 
         # LiDAR Intialization
         ray_caster_cfg = RayCasterCfg(
-            prim_path="/World/envs/env_.*/Hummingbird_0/base_link",
-            offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 0.0)),
-            attach_yaw_only=True,
+            prim_path="/World/envs/env_.*/Hummingbird_0/base_link", # LiDAR 所在的路径
+            offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 0.0)), # LiDAR 相对于无人机的位置偏移
+            attach_yaw_only=True,   # 只旋转 yaw 轴以匹配无人机的方向
             # attach_yaw_only=False,
             pattern_cfg=patterns.BpearlPatternCfg(
                 horizontal_res=self.lidar_hres, # horizontal default is set to 10
@@ -544,7 +545,7 @@ class NavigationEnv(IsaacEnv):
         }
 
 
-        # -----------------Reward Calculation-----------------
+        # -----------------Reward Calculation 奖励计算-----------------
         # a. safety reward for static obstacles
         reward_safety_static = torch.log((self.lidar_range-self.lidar_scan).clamp(min=1e-6, max=self.lidar_range)).mean(dim=(2, 3))
         
@@ -570,7 +571,7 @@ class NavigationEnv(IsaacEnv):
         static_collision = einops.reduce(self.lidar_scan, "n 1 w h -> n 1", "max") >  (self.lidar_range - 0.3) # 0.3 collision radius
         collision = static_collision | dynamic_collision
         
-        # Final reward calculation
+        # Final reward calculation 最终的 奖励
         if (self.cfg.env_dyn.num_obstacles != 0):
             self.reward = reward_vel + 1. + reward_safety_static * 1.0 + reward_safety_dynamic * 1.0 - penalty_smooth * 0.1 - penalty_height * 8.0
         else:

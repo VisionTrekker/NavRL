@@ -68,6 +68,7 @@ class SyncDataCollector(_SyncDataCollector):
                 tensordict_out = tensordict_out.exclude(
                     *excluded_keys, inplace=True
                 )
+            # 返回收集的数据
             if self.return_same_td:
                 yield tensordict_out
             else:
