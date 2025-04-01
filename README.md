@@ -9,15 +9,13 @@
 
 Welcome to the NavRL repository! This repository provides the implementation of the [NavRL](https://ieeexplore.ieee.org/document/10904341) framework, designed to enable robots to safely navigate dynamic environments using Reinforcement Learning. While the original paper focuses on UAV navigation, the NavRL can be extended to any robot that adopts a velocity-based control system.
 
-
 <table>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/49467fe4-e1c5-4f6d-a619-6e2063f99c5b" alt="mill19 2nd - gif" style="width: 100%;"></td>
-    <td><img src="https://github.com/user-attachments/assets/12a64125-169c-46a8-8a7c-bb4bbecade55" alt="mill19 1st - gif" style="width: 100%;"></td>
-    <td><img src="https://github.com/user-attachments/assets/22e6be11-9a8d-4207-b2ff-4cef3b601b41" alt="go2 navigation - gif" style="width: 100%;"></td>
+    <td><img src="media/NavRL-demo1.gif" style="width: 100%;"></td>
+    <td><img src="media/NavRL-demo2.gif" style="width: 100%;"></td>
+    <td><img src="media/NavRL-demo3.gif" style="width: 100%;"></td>
   </tr>
 </table>
-
 
 
 For additional details, please refer to the related paper available here:
@@ -97,7 +95,7 @@ Use the default parameter to run a training example with 2 robots to verify inst
 conda activate NavRL
 
 # Run a training example with default settings
-python training/script/train.py
+python training/scripts/train.py
 ```
 If the repo is installed correctly, you should be able to see the Isaac Sim window as shown below: 
 
@@ -109,7 +107,7 @@ The training environment settings and hyerparameters can be found in ```NavRL/is
 
 The following example demonstrates training with 1024 robots, 350 static obstacles, and 80 dynamic obstacles (an RTX 4090 is required). We recommend using [Wandb](https://wandb.ai/site/) to monitor your training and evaluation statistics.
 ```
-python training/script/train.py headless=True env.num_envs=1024 env.num_obstacles=350 \
+python training/scripts/train.py headless=True env.num_envs=1024 env.num_obstacles=350 \
 env_dyn.num_obstacles=80 wandb.mode=online
 ```
 After training for a sufficient amount of time, you should observe the robots learning to avoid collisions:
@@ -118,7 +116,7 @@ https://github.com/user-attachments/assets/2294bd94-69b3-4ce8-8e91-0118cfae9bcd
 
 
 ## II. Deployment Virtual Environment
-This section provides the minimum conda environment setup required to deploy ```NavRL``` (including running on a real robot). If you have already created the  ```NavRL``` onda environment during the [Isaac training step](#I-Training-in-NVIDIA-Isaac-Sim), you can skip this section. To create the conda environment, run the following commands:
+This section provides the minimum conda environment setup required to deploy ```NavRL``` (including running on a real robot). If you have already created the  ```NavRL``` conda environment during the [Isaac training step](#I-Training-in-NVIDIA-Isaac-Sim), you can skip this section. To create the conda environment, run the following commands:
 ```
 cd NavRL/isaac-training
 bash setup_deployment.sh
