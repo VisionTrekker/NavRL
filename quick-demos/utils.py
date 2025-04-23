@@ -256,7 +256,7 @@ def get_ray_cast(robot_pos, obstacles, max_range=4.0,
     num_h = int(360 / hres_deg)
     num_v = len(vfov_angles_deg)
 
-    range_matrix = np.full((num_v, num_h), max_range)
+    range_matrix = np.full((num_h, num_v), max_range)
     v0_idx = vfov_angles_deg.index(0.0)
     ray_segments_2d = []
 
@@ -265,7 +265,7 @@ def get_ray_cast(robot_pos, obstacles, max_range=4.0,
         h_angle_rad = np.deg2rad(h_angle_deg)
 
         dist = ray_cast_distance(robot_pos, h_angle_rad, obstacles, max_range, 0.0)
-        range_matrix[v0_idx, h] = dist
+        range_matrix[h, 1:4] = dist
 
         x_end = robot_pos[0] + dist * np.cos(h_angle_rad)
         y_end = robot_pos[1] + dist * np.sin(h_angle_rad)

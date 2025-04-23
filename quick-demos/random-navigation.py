@@ -152,7 +152,7 @@ def update(frame):
         ray_angle_deg = direction_angle_deg + i * HRES_DEG
         angle_diff = (ray_angle_deg - direction_angle_deg + 180) % 360 - 180
 
-        ray_range = range_matrix[v0_idx, i]
+        ray_range = range_matrix[i, v0_idx]
 
         if abs(angle_diff) <= cover_degree and ray_range < MAX_RAY_LENGTH:
             line.set_data([seg[0][0], seg[1][0]], [seg[0][1], seg[1][1]])
