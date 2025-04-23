@@ -169,7 +169,7 @@ Then, set the environment vairable for Gazebo models.
 ```
 echo 'source /path/to/ros1/uav_simulator/gazeboSetup.bash' >> ~/.bashrc
 ```
-Note that the environment variable should be set within the catkin_ws. For example, the correct ```~./.bashrc``` script should be  ```source ~/catkin_ws/src/ros1/uav_simulator/gazeboSetup.bash``` instead of ```path/to/NavRL/ros1/uav_simulator/gazeboSetup.bash```).
+Note that the environment variable should be set within the catkin_ws. For example, the correct ```~./.bashrc``` script should be  ```source ~/catkin_ws/src/ros1/uav_simulator/gazeboSetup.bash``` instead of ```source path/to/NavRL/ros1/uav_simulator/gazeboSetup.bash```).
 
 Finally, start the simulation and deploy NavRL navigation.
 ```
