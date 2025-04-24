@@ -24,7 +24,7 @@ Zhefan Xu, Xinming Han, Haoyu Shen, Hanyu Jin, and Kenji Shimada, "NavRL: Learni
 
 
 ## News
-
+* **2025-04-06:** We release easy-to-run Python scripts that allows users to quickly run demos.
 * **2025-02-23:** The GitHub code, video demos, and relavant papers for our NavRL framework are released. The authors will actively maintain and update this repo!
 
 ## Table of Contents
@@ -32,9 +32,34 @@ Zhefan Xu, Xinming Han, Haoyu Shen, Hanyu Jin, and Kenji Shimada, "NavRL: Learni
  - [Deployment Virtual Environment](#II-Deployment-Virtual-Environment)
  - [NavRL ROS1 Deployment](#III-NavRL-ROS1-Deployment)
  - [NavRL ROS2 Deployment](#IV-NavRL-ROS2-Deployment)
- - [Reference](#V-Reference)
+ - [Citation and Reference](#V-Citation-and-Reference)
  - [Acknowledgement](#VI-Acknowledgement)
 
+## NavRL Quick Demos in 3 Minutes
+We provide a pretrained model and easy-to-run Python scripts for quick demos of the NavRL framework.
+
+<table>
+  <tr>
+    <td><img src="media/simple-navigation.gif" style="width: 100%;"></td>
+    <td><img src="media/dynamic-navigation.gif" style="width: 100%;"></td>
+    <td><img src="media/multi-robot-navigation.gif" style="width: 100%;"></td>
+  </tr>
+</table>
+
+To get started, please follow the steps in [Deployment Virtual Environment](#II-Deployment-Virtual-Environment) to set up the Conda environment. Once the setup is complete, you can run the following three demos with the following commands:
+```
+conda activate NavRL
+cd NavRL/quick-demos
+
+# DEMO I: Navigating to a predefined goal point
+python simple-navigation.py
+
+# DEMO II: Navigating to dynamically/randomly assigned goal points
+python random-navigation.py
+
+# DEMO III: Multi-robot navigation
+python multi-robot-navigation.py
+```
 
 ## I. Training in NVIDIA Isaac Sim
 This section provides the steps for training your own RL agent with the NavRL framework in Isaac Sim. **If you are not interested in training the agent yourself, feel free to skip this section and jump straight to the deployment section.**
@@ -144,6 +169,8 @@ Then, set the environment vairable for Gazebo models.
 ```
 echo 'source /path/to/ros1/uav_simulator/gazeboSetup.bash' >> ~/.bashrc
 ```
+Note that the environment variable should be set within the catkin_ws. For example, the correct ```~./.bashrc``` script should be  ```source ~/catkin_ws/src/ros1/uav_simulator/gazeboSetup.bash``` instead of ```source path/to/NavRL/ros1/uav_simulator/gazeboSetup.bash```).
+
 Finally, start the simulation and deploy NavRL navigation.
 ```
 # Launch the gazebo simulator
@@ -201,7 +228,7 @@ An Isaac Sim window will display the environment while an RViz window presents t
 https://github.com/user-attachments/assets/4787f503-d8a3-4d7b-9d17-7057b2cff1eb
 
 
-## V. Reference
+## V. Citation and Reference
 If our work is useful to your research, please consider citing our paper.
 ```
 @ARTICLE{NavRL,
